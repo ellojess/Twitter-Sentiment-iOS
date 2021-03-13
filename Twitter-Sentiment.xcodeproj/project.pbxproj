@@ -11,6 +11,7 @@
 		73B0192F25FC4DE300703ED8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B0192E25FC4DE300703ED8 /* ContentView.swift */; };
 		73B0193125FC4DE300703ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73B0193025FC4DE300703ED8 /* Assets.xcassets */; };
 		73B0193425FC4DE300703ED8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73B0193325FC4DE300703ED8 /* Preview Assets.xcassets */; };
+		73B0193D25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 73B0193C25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		73B0193025FC4DE300703ED8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73B0193325FC4DE300703ED8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		73B0193525FC4DE300703ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73B0193C25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TweetSentimentClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				73B0192C25FC4DE300703ED8 /* Twitter_SentimentApp.swift */,
+				73B0193C25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel */,
 				73B0192E25FC4DE300703ED8 /* ContentView.swift */,
 				73B0193025FC4DE300703ED8 /* Assets.xcassets */,
 				73B0193525FC4DE300703ED8 /* Info.plist */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73B0193D25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel in Sources */,
 				73B0192F25FC4DE300703ED8 /* ContentView.swift in Sources */,
 				73B0192D25FC4DE300703ED8 /* Twitter_SentimentApp.swift in Sources */,
 			);
