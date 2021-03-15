@@ -71,9 +71,8 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request using this [template](https://github.com/embeddedartistry/templates/blob/master/oss_docs/PULL_REQUEST_TEMPLATE.md)
 
 ### Possible Contributions 
-- [ ] Add a new feature
+- [ ] Add a new feature 
 - [ ] New UI 
-- [ ] 
 
 <!-- LICENSE -->
 ## License
