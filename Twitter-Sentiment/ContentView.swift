@@ -11,8 +11,9 @@ import SwifteriOS
 struct ContentView: View {
     @State var searchTerm: String = ""
     @State private var searchButtonPressed = false
+    @State var sentiment = "😁"
     
-    let swifter = Swifter(consumerKey: "", consumerSecret: "")
+    let swifter = Swifter(consumerKey: apiKey, consumerSecret: apiSecretKey)
     
     
     var body: some View {
@@ -36,11 +37,21 @@ struct ContentView: View {
                 }
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 
-                Button("Search") {
-                    searchButtonPressed.toggle()
-                }
+                Button(
+                    action: searchTweet,
+                    label: {Text("Search")}
+                )
             }.padding()
         }
+    }
+    
+    func searchTweet() {
+        swifter.searchTweet(using: "@Apple") { (results, metadata) in
+            print(results)
+        } failure: { (error) in
+            print("Error w/ API Request: \(error)")
+        }
+
     }
 }
 
