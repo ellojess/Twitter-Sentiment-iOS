@@ -8,6 +8,7 @@
 import SwiftUI
 import SwifteriOS
 import CoreML
+import SwiftyJSON
 
 struct ContentView: View {
     @State var searchTerm: String = ""
