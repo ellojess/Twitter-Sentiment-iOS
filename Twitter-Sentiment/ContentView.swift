@@ -20,6 +20,8 @@ struct ContentView: View {
     
     let sentimentClassifier = TweetSentimentClassifier()
     
+    let tweetCount = 100
+    
     
     var body: some View {
         // backgrounds color
@@ -30,7 +32,7 @@ struct ContentView: View {
             // UI for label and textfield
             VStack(alignment: .leading) {
                 Text("\(sentimentEmoji)")
-        
+                
                 Text("Sentiment Score: \(sentimentScoreLabel)")
                     .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 
@@ -42,7 +44,7 @@ struct ContentView: View {
                     .keyboardType(.twitter)
                 
                 Button(action: {
-                    searchTweet()
+                    fetchTweets()
                 }) {
                     Text("Search")
                 }
@@ -53,9 +55,9 @@ struct ContentView: View {
     // filter tweets, performing search query,
     // in english w/ maximum of 100 tweets returned
     // and .extended to return full/max 280 characters from Twitter
-    func searchTweet() {
-        swifter.searchTweet(using: "\(searchTerm)", lang: "en", count: 100, tweetMode: .extended, success: { (results, metadata) in
-//            print(results)
+    func fetchTweets() {
+        swifter.searchTweet(using: "\(searchTerm)", lang: "en", count: tweetCount, tweetMode: .extended, success: { (results, metadata) in
+            //            print(results)
             
             var tweets = [TweetSentimentClassifierInput]()
             
@@ -63,7 +65,7 @@ struct ContentView: View {
             
             // parse all tweets out of JSON
             // add items to array for prediction
-            for i in 0..<100 {
+            for i in 0..<tweetCount {
                 // parse JSON w/ SwiftyJSON
                 // get full_text property of first result/tweet
                 if let tweet = results[i]["full_text"].string {
@@ -72,91 +74,60 @@ struct ContentView: View {
                 }
             }
             
-            // make batch predictions
-            do {
-                let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
-                
-                var sentimentScore = 0
-                
-                // predict sentiment of all fetched tweets
-                for prediction in predictions {
-                    
-                    // prediction.label retrieved from mlmodel
-                    let sentiment = prediction.label
-                    
-                    // determine sentiment score of hashtag or phrase
-                    if sentiment == "Pos" {
-                        // increase sentiment score by 1 if positive sentiment
-                        sentimentScore += 1
-                    } else if sentiment == "Neg" {
-                        // decrease sentiment score by 1 if negative sentiment
-                        sentimentScore -= 1
-                    }
-                }
-                
-                // update sentiment score label
-                print(sentimentScore)
-                sentimentScoreLabel = "\(sentimentScore)"
-                
-                
-                // update sentiment emoji
-                if sentimentScore > 30 {
-                    sentimentEmoji = SentimentKind.wonderful.rawValue
-                } else if sentimentScore > 20 {
-                    
-                }
-                
-                updateEmoji(with: sentimentScore)
-                
-//                print(predictions[0].label)
-            } catch {
-                print("Error making prediction: \(error)")
-            }
+            // make sentiment prediction with fetched tweets
+            makeSentimentPrediction(with: tweets)
             
-            
-//            print(tweets)
+            // print(tweets)
             
         }) { (error) in
             print("Error w/ API Request: \(error)")
         }
     }
     
-    func updateEmoji(with sentimentScore: Int) {
-        if sentimentScore > 30 {
-            sentimentEmoji = SentimentKind.offTheChart.emoji
+    
+    func makeSentimentPrediction(with tweets: [TweetSentimentClassifierInput]) {
+        // make batch predictions
+        do {
+            let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
+            
+            var sentimentScore = 0
+            
+            // predict sentiment of all fetched tweets
+            for prediction in predictions {
+                // prediction.label retrieved from mlmodel
+                let sentiment = prediction.label
+                
+                // determine sentiment score of hashtag or phrase
+                if sentiment == "Pos" {
+                    // increase sentiment score by 1 if positive sentiment
+                    sentimentScore += 1
+                } else if sentiment == "Neg" {
+                    // decrease sentiment score by 1 if negative sentiment
+                    sentimentScore -= 1
+                }
+            }
+            
+            // update sentiment score label in UI
+            sentimentScoreLabel = "\(sentimentScore)"
+            // update sentiment emoji label in UI
+            updateEmoji(with: sentimentScore)
+            
+        } catch {
+            print("Error making prediction: \(error)")
         }
-        
-        if sentimentScore > 20 {
-            sentimentEmoji = SentimentKind.wonderful.emoji
-        }
-        
-        else if sentimentScore > 10 {
-            sentimentEmoji = SentimentKind.great.emoji
-        }
-        
-        else if sentimentScore > 0 {
-            sentimentEmoji = SentimentKind.good.emoji
-        }
-        
-        else if sentimentScore == 0 {
-            sentimentEmoji = SentimentKind.okay.emoji
-        }
-        
-        else if sentimentScore > -10 {
-            sentimentEmoji = SentimentKind.notOkay.emoji
-        }
-        
-        else if sentimentScore > -20 {
-            sentimentEmoji = SentimentKind.bad.emoji
-        }
-        
-        else {
-            sentimentEmoji = SentimentKind.horrible.emoji
-        }
-        
-
     }
     
+    // update emoji label in UI based on sentiment score
+    func updateEmoji(with sentimentScore: Int) {
+        if sentimentScore > 30 { sentimentEmoji = SentimentKind.offTheChart.emoji}
+        else if sentimentScore > 20 { sentimentEmoji = SentimentKind.wonderful.emoji}
+        else if sentimentScore > 10 { sentimentEmoji = SentimentKind.great.emoji}
+        else if sentimentScore > 0 { sentimentEmoji = SentimentKind.good.emoji}
+        else if sentimentScore == 0 {sentimentEmoji = SentimentKind.okay.emoji}
+        else if sentimentScore > -10 {sentimentEmoji = SentimentKind.notOkay.emoji}
+        else if sentimentScore > -20 {sentimentEmoji = SentimentKind.bad.emoji}
+        else {sentimentEmoji = SentimentKind.horrible.emoji}
+    }
     
 }
 
