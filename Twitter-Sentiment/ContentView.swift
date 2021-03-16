@@ -58,7 +58,7 @@ struct ContentView: View {
         swifter.searchTweet(using: "@Apple", lang: "en", count: 100, tweetMode: .extended, success: { (results, metadata) in
 //            print(results)
             
-            var tweets = [String]()
+            var tweets = [TweetSentimentClassifierInput]()
             
             // MARK: TODO: parse w/ encode/decode
             
@@ -68,9 +68,25 @@ struct ContentView: View {
                 // parse JSON w/ SwiftyJSON
                 // get full_text property of first result/tweet
                 if let tweet = results[i]["full_text"].string {
-                    tweets.append(tweet)
+                    let tweetForClassification = TweetSentimentClassifierInput(text: tweet)
+                    tweets.append(tweetForClassification)
                 }
             }
+            
+            // make batch predictions
+            do {
+                let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
+                
+                // predict sentiment of all fetched tweets
+                for prediction in predictions {
+                    print(prediction.label)
+                }
+                
+//                print(predictions[0].label)
+            } catch {
+                print("Error making prediction: \(error)")
+            }
+            
             
 //            print(tweets)
             
