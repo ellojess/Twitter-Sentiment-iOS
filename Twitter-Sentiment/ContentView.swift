@@ -34,16 +34,12 @@ struct ContentView: View {
                 Text("Search Twitter")
                     .font(.callout)
                     .bold()
-                TextField("Enter hashtag or phrase", text: $searchTerm, onEditingChanged: {(changed) in
-                    print("changed \(changed)")
-                }) {
-                    print("searchTerm onCommit")
-                }
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                TextField("Enter hashtag or phrase", text: $searchTerm)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.twitter)
                 
                 Button(action: {
                     searchTweet()
-//                    testPrediction()
                 }) {
                     Text("Search")
                 }
@@ -55,7 +51,7 @@ struct ContentView: View {
     // in english w/ maximum of 100 tweets returned
     // and .extended to return full/max 280 characters from Twitter
     func searchTweet() {
-        swifter.searchTweet(using: "@Apple", lang: "en", count: 100, tweetMode: .extended, success: { (results, metadata) in
+        swifter.searchTweet(using: "\(searchTerm)", lang: "en", count: 100, tweetMode: .extended, success: { (results, metadata) in
 //            print(results)
             
             var tweets = [TweetSentimentClassifierInput]()
@@ -81,7 +77,6 @@ struct ContentView: View {
                 
                 // predict sentiment of all fetched tweets
                 for prediction in predictions {
-//                    print(prediction.label)
                     
                     // prediction.label retrieved from mlmodel
                     let sentiment = prediction.label
@@ -109,15 +104,6 @@ struct ContentView: View {
         }) { (error) in
             print("Error w/ API Request: \(error)")
         }
-    }
-    
-    func testPrediction() {
-        let negPrediction = try! sentimentClassifier.prediction(text: "@Apple is the worst!")
-        let posPrediction = try! sentimentClassifier.prediction(text: "@Apple is the best!")
-        
-        print(negPrediction.label)
-        print(posPrediction.label)
-
     }
     
     
