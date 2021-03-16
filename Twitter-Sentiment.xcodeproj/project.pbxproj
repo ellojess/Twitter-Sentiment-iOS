@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		73B0193D25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 73B0193C25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel */; };
 		73B0195625FCC73B00703ED8 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0194825FCC6D300703ED8 /* SwifteriOS.framework */; };
 		73B0195725FCC73B00703ED8 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0194825FCC6D300703ED8 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		73BC95942601544F00E56777 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC95932601544F00E56777 /* Emoji.swift */; };
 		D0BE242385BBA6CCC5A50A7B /* Pods_Twitter_Sentiment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56120DD94F2015AFC83A634E /* Pods_Twitter_Sentiment.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		73B0193525FC4DE300703ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73B0193C25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TweetSentimentClassifier.mlmodel; sourceTree = "<group>"; };
 		73B0193F25FCC6D300703ED8 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = ../../Desktop/Swifter/Swifter.xcodeproj; sourceTree = "<group>"; };
+		73BC95932601544F00E56777 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		7CD709543BA1CE27E09DFD98 /* Pods-Twitter-Sentiment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter-Sentiment.release.xcconfig"; path = "Target Support Files/Pods-Twitter-Sentiment/Pods-Twitter-Sentiment.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 				73B0192C25FC4DE300703ED8 /* Twitter_SentimentApp.swift */,
 				73B0193C25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel */,
 				73B0192E25FC4DE300703ED8 /* ContentView.swift */,
+				73BC95932601544F00E56777 /* Emoji.swift */,
 				735E93E325FF0B6500D73B15 /* Constants.swift */,
 				73B0193025FC4DE300703ED8 /* Assets.xcassets */,
 				73B0193525FC4DE300703ED8 /* Info.plist */,
@@ -165,7 +168,6 @@
 				7167E052A8AF57ED763D4702 /* Pods-Twitter-Sentiment.debug.xcconfig */,
 				7CD709543BA1CE27E09DFD98 /* Pods-Twitter-Sentiment.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -327,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73BC95942601544F00E56777 /* Emoji.swift in Sources */,
 				73B0193D25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel in Sources */,
 				73B0192F25FC4DE300703ED8 /* ContentView.swift in Sources */,
 				73B0192D25FC4DE300703ED8 /* Twitter_SentimentApp.swift in Sources */,

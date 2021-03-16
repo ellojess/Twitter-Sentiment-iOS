@@ -12,7 +12,8 @@ import SwiftyJSON
 
 struct ContentView: View {
     @State var searchTerm: String = ""
-    @State var sentiment = "😁"
+    @State var sentimentScoreLabel = "0"
+    @State var sentimentEmoji = "👻"
     
     // authenticate w/ Twitter API through Swifter framework
     let swifter = Swifter(consumerKey: apiKey, consumerSecret: apiSecretKey)
@@ -28,7 +29,9 @@ struct ContentView: View {
             
             // UI for label and textfield
             VStack(alignment: .leading) {
-                Text("Sentiment Score: ")
+                Text("\(sentimentEmoji)")
+        
+                Text("Sentiment Score: \(sentimentScoreLabel)")
                     .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 
                 Text("Search Twitter")
@@ -91,7 +94,19 @@ struct ContentView: View {
                     }
                 }
                 
+                // update sentiment score label
                 print(sentimentScore)
+                sentimentScoreLabel = "\(sentimentScore)"
+                
+                
+                // update sentiment emoji
+                if sentimentScore > 30 {
+                    sentimentEmoji = SentimentKind.wonderful.rawValue
+                } else if sentimentScore > 20 {
+                    
+                }
+                
+                updateEmoji(with: sentimentScore)
                 
 //                print(predictions[0].label)
             } catch {
@@ -104,6 +119,42 @@ struct ContentView: View {
         }) { (error) in
             print("Error w/ API Request: \(error)")
         }
+    }
+    
+    func updateEmoji(with sentimentScore: Int) {
+        if sentimentScore > 30 {
+            sentimentEmoji = SentimentKind.offTheChart.emoji
+        }
+        
+        if sentimentScore > 20 {
+            sentimentEmoji = SentimentKind.wonderful.emoji
+        }
+        
+        else if sentimentScore > 10 {
+            sentimentEmoji = SentimentKind.great.emoji
+        }
+        
+        else if sentimentScore > 0 {
+            sentimentEmoji = SentimentKind.good.emoji
+        }
+        
+        else if sentimentScore == 0 {
+            sentimentEmoji = SentimentKind.okay.emoji
+        }
+        
+        else if sentimentScore > -10 {
+            sentimentEmoji = SentimentKind.notOkay.emoji
+        }
+        
+        else if sentimentScore > -20 {
+            sentimentEmoji = SentimentKind.bad.emoji
+        }
+        
+        else {
+            sentimentEmoji = SentimentKind.horrible.emoji
+        }
+        
+
     }
     
     
