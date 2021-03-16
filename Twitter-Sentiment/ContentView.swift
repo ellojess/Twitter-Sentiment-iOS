@@ -43,7 +43,7 @@ struct ContentView: View {
                 
                 Button(action: {
                     searchTweet()
-                    testPrediction()
+//                    testPrediction()
                 }) {
                     Text("Search")
                 }
@@ -57,6 +57,23 @@ struct ContentView: View {
     func searchTweet() {
         swifter.searchTweet(using: "@Apple", lang: "en", count: 100, tweetMode: .extended, success: { (results, metadata) in
 //            print(results)
+            
+            var tweets = [String]()
+            
+            // MARK: TODO: parse w/ encode/decode
+            
+            // parse all tweets out of JSON
+            // add items to array for prediction
+            for i in 0..<100 {
+                // parse JSON w/ SwiftyJSON
+                // get full_text property of first result/tweet
+                if let tweet = results[i]["full_text"].string {
+                    tweets.append(tweet)
+                }
+            }
+            
+//            print(tweets)
+            
         }) { (error) in
             print("Error w/ API Request: \(error)")
         }
