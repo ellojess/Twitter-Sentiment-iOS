@@ -77,10 +77,26 @@ struct ContentView: View {
             do {
                 let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
                 
+                var sentimentScore = 0
+                
                 // predict sentiment of all fetched tweets
                 for prediction in predictions {
-                    print(prediction.label)
+//                    print(prediction.label)
+                    
+                    // prediction.label retrieved from mlmodel
+                    let sentiment = prediction.label
+                    
+                    // determine sentiment score of hashtag or phrase
+                    if sentiment == "Pos" {
+                        // increase sentiment score by 1 if positive sentiment
+                        sentimentScore += 1
+                    } else if sentiment == "Neg" {
+                        // decrease sentiment score by 1 if negative sentiment
+                        sentimentScore -= 1
+                    }
                 }
+                
+                print(sentimentScore)
                 
 //                print(predictions[0].label)
             } catch {
