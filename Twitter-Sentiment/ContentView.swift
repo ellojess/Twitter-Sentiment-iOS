@@ -30,25 +30,30 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             // UI for label and textfield
-            VStack(alignment: .leading) {
-                Text("\(sentimentEmoji)")
-                
+            VStack() {
                 Text("Sentiment Score: \(sentimentScoreLabel)")
-                    .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(alignment: .leading)
+                    .font(.system(size: 20))
                 
+//                SentimentCircleView()
+//                    .$score = CGFloat(sentimentScoreLabel)
+               
+                Text("\(sentimentEmoji)")
+                    .font(.system(size: 105))
+                    .padding()
+            
                 Text("Search Twitter")
                     .font(.callout)
                     .bold()
-                TextField("Enter hashtag or phrase", text: $searchTerm)
+                TextField("Enter hashtag or phrase (i.e. #blessed)", text: $searchTerm)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.twitter)
-                
                 Button(action: {
                     fetchTweets()
                 }) {
                     Text("Search")
-                }
-            }.padding()
+                }.padding()
+            }
         }
     }
     
@@ -77,7 +82,7 @@ struct ContentView: View {
             // make sentiment prediction with fetched tweets
             makeSentimentPrediction(with: tweets)
             
-            // print(tweets)
+//             print(tweets)
             
         }) { (error) in
             print("Error w/ API Request: \(error)")
@@ -107,10 +112,15 @@ struct ContentView: View {
                 }
             }
             
+            
+            SentimentCircleView.init(score: CGFloat(sentimentScore))
+            
             // update sentiment score label in UI
             sentimentScoreLabel = "\(sentimentScore)"
             // update sentiment emoji label in UI
+            
             updateEmoji(with: sentimentScore)
+//            print(sentimentScore)
             
         } catch {
             print("Error making prediction: \(error)")
