@@ -14,6 +14,7 @@ struct ContentView: View {
     @State var searchTerm: String = ""
     @State var sentimentScoreLabel = "0"
     @State var sentimentEmoji = "👻"
+    @State private var beating = false
     
     // authenticate w/ Twitter API through Swifter framework
     let swifter = Swifter(consumerKey: apiKey, consumerSecret: apiSecretKey)
@@ -41,6 +42,12 @@ struct ContentView: View {
                 Text("\(sentimentEmoji)")
                     .font(.system(size: 105))
                     .padding()
+                    .foregroundColor(Color(beating ? .systemPink : .systemRed))
+                    .scaleEffect(beating ? 1 : 1.25)
+                    .animation(Animation.interpolatingSpring(stiffness: 30, damping: 15).repeatForever(autoreverses: false))
+                    .onAppear(){
+                        self.beating.toggle()
+                    }
             
                 Text("Search Twitter")
                     .font(.callout)
