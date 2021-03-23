@@ -51,8 +51,14 @@ struct ContentView: View {
                 Button(action: {
                     fetchTweets()
                 }) {
-                    Text("Search")
-                }.padding()
+                    ZStack {
+                        Image("twitter-logo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 150)
+                        Text("Search")
+                    }
+                }
             }
         }
     }
@@ -150,3 +156,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
