@@ -61,31 +61,35 @@ struct ContentView: View {
     // in english w/ maximum of 100 tweets returned
     // and .extended to return full/max 280 characters from Twitter
     func fetchTweets() {
-        swifter.searchTweet(using: "\(searchTerm)", lang: "en", count: tweetCount, tweetMode: .extended, success: { (results, metadata) in
-            //            print(results)
-            
-            var tweets = [TweetSentimentClassifierInput]()
-            
-            // MARK: TODO: parse w/ encode/decode
-            
-            // parse all tweets out of JSON
-            // add items to array for prediction
-            for i in 0..<tweetCount {
-                // parse JSON w/ SwiftyJSON
-                // get full_text property of first result/tweet
-                if let tweet = results[i]["full_text"].string {
-                    let tweetForClassification = TweetSentimentClassifierInput(text: tweet)
-                    tweets.append(tweetForClassification)
-                }
+
+    
+            NetworkManager.shared.getTweets(for: "\(searchTerm)") { [self] (result) in
+                guard self != nil else { return }
+                switch result {
+                case .success(let tweetList):
+                    
+                    var tweets = [TweetSentimentClassifierInput]()
+                    
+                    // MARK: TODO: parse w/ encode/decode
+                    
+                    // parse all tweets out of JSON
+                    // add items to array for prediction
+                    for i in tweetList {
+                        // parse JSON w/ SwiftyJSON
+                        // get full_text property of first result/tweet
+                        
+                        let tweetForClassification = TweetSentimentClassifierInput(text: i.text)
+                        tweets.append(tweetForClassification)
+                    
+                    }
+                    
+                    // make sentiment prediction with fetched tweets
+                    makeSentimentPrediction(with: tweets)
+                    
+                    // print(tweets)
+                case .failure(let error):
+                    print(error)
             }
-            
-            // make sentiment prediction with fetched tweets
-            makeSentimentPrediction(with: tweets)
-            
-//             print(tweets)
-            
-        }) { (error) in
-            print("Error w/ API Request: \(error)")
         }
     }
     
