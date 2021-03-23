@@ -11,6 +11,7 @@
 		6F4444152609651300D665BC /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F444407260964B800D665BC /* SwifteriOS.framework */; };
 		6F4444162609651300D665BC /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F444407260964B800D665BC /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F444420260965FE00D665BC /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44441F260965FE00D665BC /* Tweet.swift */; };
+		6F444426260967AB00D665BC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F444425260967AB00D665BC /* NetworkManager.swift */; };
 		73B0192D25FC4DE300703ED8 /* Twitter_SentimentApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B0192C25FC4DE300703ED8 /* Twitter_SentimentApp.swift */; };
 		73B0192F25FC4DE300703ED8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B0192E25FC4DE300703ED8 /* ContentView.swift */; };
 		73B0193125FC4DE300703ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73B0193025FC4DE300703ED8 /* Assets.xcassets */; };
@@ -79,6 +80,7 @@
 		6F4443FE260964B800D665BC /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "../../../Downloads/Swifter 2/Swifter.xcodeproj"; sourceTree = "<group>"; };
 		6F444413260964EF00D665BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6F44441F260965FE00D665BC /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		6F444425260967AB00D665BC /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = ../../../../../../.Trash/NetworkManager.swift; sourceTree = "<group>"; };
 		7167E052A8AF57ED763D4702 /* Pods-Twitter-Sentiment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter-Sentiment.debug.xcconfig"; path = "Target Support Files/Pods-Twitter-Sentiment/Pods-Twitter-Sentiment.debug.xcconfig"; sourceTree = "<group>"; };
 		73B0192925FC4DE300703ED8 /* Twitter-Sentiment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Twitter-Sentiment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73B0192C25FC4DE300703ED8 /* Twitter_SentimentApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter_SentimentApp.swift; sourceTree = "<group>"; };
@@ -127,6 +129,15 @@
 			path = "../../Intensive/Twitter-Sentiment-iOS/Twitter-Sentiment/Model";
 			sourceTree = "<group>";
 		};
+		6F4444242609679B00D665BC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6F444425260967AB00D665BC /* NetworkManager.swift */,
+			);
+			name = Managers;
+			path = "../../Intensive/Twitter-Sentiment-iOS/Twitter-Sentiment/Managers";
+			sourceTree = "<group>";
+		};
 		73B0192025FC4DE300703ED8 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +160,7 @@
 		73B0192B25FC4DE300703ED8 /* Twitter-Sentiment */ = {
 			isa = PBXGroup;
 			children = (
+				6F4444242609679B00D665BC /* Managers */,
 				6F44441E260965FD00D665BC /* Model */,
 				73BA27EB2602ADBC0006B13F /* Color-Extension.swift */,
 				73BA27F22602AEE20006B13F /* SentimentCircleView.swift */,
@@ -347,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F444426260967AB00D665BC /* NetworkManager.swift in Sources */,
 				73BC95942601544F00E56777 /* Emoji.swift in Sources */,
 				73BA27F12602ADBF0006B13F /* Color-Extension.swift in Sources */,
 				73B0193D25FCC49A00703ED8 /* TweetSentimentClassifier.mlmodel in Sources */,
