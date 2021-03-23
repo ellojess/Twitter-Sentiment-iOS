@@ -59,6 +59,8 @@ struct ContentView: View {
                         Text("Search")
                     }
                 }
+                
+
             }
         }
     }
@@ -67,10 +69,10 @@ struct ContentView: View {
     // in english w/ maximum of 100 tweets returned
     // and .extended to return full/max 280 characters from Twitter
     func fetchTweets() {
-
-    
+        
             NetworkManager.shared.getTweets(for: "\(searchTerm)") { [self] (result) in
                 guard self != nil else { return }
+                
                 switch result {
                 case .success(let tweetList):
                     
